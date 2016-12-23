@@ -1,0 +1,37 @@
+#!/bin/bash
+set -e
+
+BASEDIR=$(cd $(dirname $0)/..; pwd)
+RELEASE_USERNAME=""
+
+if [ -z "${BUILD_TRIGGEREDBY}" ]; then
+    USERNAME="${LOGNAME}"
+else
+    USERNAME="${BUILD_TRIGGEREDBY}"
+fi
+
+REGISTRY=""
+DO_PUSH="$1"
+
+cd $(dirname $0)
+
+export VERSION=
+
+cd ${BASEDIR}
+
+if [ ${USERNAME} == ${RELEASE_USERNAME} ]; then
+    REPO_SUFFIX=""
+else
+    REPO_SUFFIX="-${USERNAME}"
+fi
+
+tag="${REGISTRY}${REPO_SUFFIX}/cifs"
+
+if [ "${DO_PUSH}" == "--push" ]; then
+    echo Pushing ${tag}:${VERSION}
+    docker push ${tag}:${VERSION} || :
+else
+    echo Building ${tag}:${VERSION}
+    docker build -t ${tag} .
+    docker tag ${tag} ${tag}:${VERSION}
+fi

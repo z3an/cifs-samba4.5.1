@@ -1,0 +1,3 @@
+CTDB_NODES=/etc/ctdb/nodes
+CTDB_MANAGES_SAMBA=yes
+CTDB_SOCKET=/var/run/ctdb/ctdbd.socket

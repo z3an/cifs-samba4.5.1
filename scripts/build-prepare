@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+
+apt-get -q -y update
+
+DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes acl attr autoconf bison build-essential   debhelper dnsutils docbook-xml docbook-xsl flex gdb krb5-user   libacl1-dev libaio-dev libattr1-dev libblkid-dev libbsd-dev   libcap-dev libcups2-dev libgnutls-dev libjson-perl   libldap2-dev libncurses5-dev libpam0g-dev libparse-yapp-perl   libpopt-dev libreadline-dev perl perl-modules pkg-config   python-all-dev \
+python-dev python-dnspython python-crypto   xsltproc zlib1g-dev vim wget sysv-rc-conf ethtool

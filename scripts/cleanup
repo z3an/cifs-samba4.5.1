@@ -1,0 +1,20 @@
+#! /bin/bash
+set -e
+
+apt-get purge --auto-remove -y acl attr autoconf bison build-essential  \
+debhelper dnsutils docbook-xml docbook-xsl flex gdb krb5-user   \
+libacl1-dev libaio-dev libattr1-dev libblkid-dev  \
+libcap-dev libgnutls-dev libjson-perl  \
+libncurses5-dev libpam0g-dev libparse-yapp-perl  \
+libreadline-dev perl perl-modules pkg-config   \
+python-all-dev python-dev python-dnspython python-crypto   xsltproc zlib1g-dev vim wget sysv-rc-conf
+
+apt-get -q -y autoremove 
+apt-get -q -y clean 
+rm -rf /tmp/* /var/tmp/*
+rm -rf /samba-4.5.1
+rm /usr/bin/ctdb_run_tests /usr/bin/ctdb_run_cluster_tests /usr/bin/ctdb_diagnostics
+rm /etc/sudoers.d/ctdb
+rm -rf /usr/share/ctdb-tests
+rm -rf /usr/libexec/ctdb/tests/
+

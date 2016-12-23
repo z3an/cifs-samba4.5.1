@@ -1,0 +1,26 @@
+#! /bin/bash
+set -e
+
+cd $(dirname $0)/.. 
+
+SAMBA_DIR="/samba-4.5.1"
+
+echo "BUILD samba ${SAMBA_DIR}"
+if [ ! -e ${SAMBA_DIR} ] ; then
+    echo Grabbing samba...
+    wget https://download.samba.org/pub/samba/stable/samba-4.5.1.tar.gz
+    tar -zxf samba-4.5.1.tar.gz
+    mv samba-4.5.1 /
+    cd ${SAMBA_DIR}
+else
+    cd ${SAMBA_DIR}
+fi
+
+mkdir /var/lib/run/ctdb -p
+
+./configure  --prefix=/usr    --sysconfdir=/etc      --localstatedir=/var  \
+            --with-piddir=/run/samba  --with-pammodulesdir=/lib/security  --enable-fhs   --without-ad-dc  --with-cluster-support
+
+make 
+make install
+
